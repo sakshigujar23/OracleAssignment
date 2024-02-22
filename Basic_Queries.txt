@@ -1,0 +1,87 @@
+REM   Script: Queries
+REM   basic queries
+
+----------------Altering Table and making Modification in it-------------------
+select* from customer;
+
+alter table customer modify  Email_id varchar(255) UNIQUE;
+
+alter table customer modify First_Name varchar(50);
+
+-----------Retieving All Records from orders & customer table-------------------
+select* from orders;
+
+select* from customer;
+
+-----------Retrieving all orders along with the customer details for each order----------
+
+select orders.Order_id,customer.First_Name,customer.Last_Name 
+from orders,customer 
+where orders.Customer_id=customer.Customer_id;
+
+---------------Filtering and Sorting-----------------
+
+---------------Retrieving customers whose last name starts with 'S'------------------
+
+select* from customer  
+where First_Name like 'S%';
+
+------Retrieving orders placed by a specific customer (you can choose one customer)----
+
+select* from orders  
+where Customer_id = 105;
+
+---------Retrieving orders placed in the last month, sorted by order date-----------
+
+SELECT * FROM orders
+WHERE order_date BETWEEN TO_DATE('01-12-2023','DD-MM-YYYY ') AND  TO_DATE('31-12-2023','DD-MM-YYYY')
+ORDER BY 'Order_date';
+;
+
+
+select* from orders 
+where Order_date >= To_Date('23-Oct-2022','DD-MM-YYYY');
+
+------------Aggregation------------------
+
+-----------Calculating the total number of orders in the Orders table-----------
+
+select count(*) from orders;
+-----------Calculating the average total amount of orders------------------
+
+select avg(Total_amount) from orders;
+
+----------Update and Delete---------
+
+select* from customer;
+
+----Updating the phone number of a specific customer-----
+
+update customer set Phone_number= 9518652340 
+where Customer_id=103;
+
+----Deleting a specific order along with its details----
+
+delete from orders 
+where order_id=02;
+
+----Joins----
+
+-----Retrieving orders along with the customer details for each order, using INNER JOIN---
+
+
+
+select c.Customer_id,c.First_Name,c.Last_Name,o.order_id,o.Product_Name,o.Total_amount 
+from customer c 
+inner join orders o on c.Customer_id=o.Customer_id;
+
+-----Retrieving customers who have not placed any orders, using LEFT JOIN----
+
+
+select c.Customer_id,c.First_Name,c.Last_Name,o.Order_id 
+from customer c 
+left outer join orders o on c.Customer_id=o.Customer_id 
+where o.Customer_id is null;
+
+select* from orders;
+

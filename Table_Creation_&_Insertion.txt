@@ -1,0 +1,89 @@
+REM   Script: Orders table & customer table
+REM   orders table & customer table
+
+-------Customer Table Creation----------------
+create table customer( 
+    Customer_id int primary key, 
+    First_Name varchar(30) , 
+    Last_Name varchar(50) , 
+    Email_id varchar(255) UNIQUE, 
+    Phone_number varchar(10) 
+);
+
+--------------Inserting Records------------
+insert into customer values(101,'Joe','Root','joe123@gmail.com',8543907512);
+
+insert into customer values(102,'Robert','Smith','robert20@gmail.com',9045671327);
+
+insert into customer values(103,'Hayley','Mikelson','hayley56@gmail.com',8735786542);
+
+insert into customer values(104,'Devid','Warnor','devid01@gmail.com',8600567821);
+
+insert into customer values(105,'Stefan','Salvator','salvator01@gmail.com',8765403212);
+
+insert into customer values(106,'Klaus','mikelson','mikelson19@gmailcom',6543679085);
+
+insert into customer values(107,'Rebacca','Roy','rebacca1@gmail.com',9067854323);
+
+insert into customer values(108,'Elena','Gillbert','elena23@gmail.com',8765453634);
+
+insert into customer values(109,'John','Harry','john45@gmail.com',6543908790);
+
+insert into customer values(110,'Mike','Robert','mike43@gmail.com',8976453423);
+
+---------Retieving All Records-------------------
+
+
+
+
+
+
+-----------Creating Orders Table----------------
+
+select* from customer;
+
+create table orders( 
+    Order_id int primary key, 
+    Order_Date Date, 
+    Product_Name varchar(50), 
+    Quatntity varchar(30), 
+    Total_Amount varchar(30) NOT NULL, 
+    Customer_id int, 
+   Foreign key(Customer_id)References customer(Customer_id)  
+     
+);
+
+
+-------------Inserting records in Orders Table------------------
+
+insert into orders values(01,to_date('23-05-2009','DD-MM-YYYY'),'SamsungM31',1,13500,103);
+
+insert into orders values(02,to_date('07-11-2011','DD-MM-YYYY'),'Nokia',2, 30000,101);
+
+insert into orders values(03,to_date('05-12-2009','DD-MM-YYYY'),'Realme',1,10000,105);
+
+insert into orders values(04,to_date('06-12-2009','DD-MM-YYYY'),'Samsungs20',1,48000,106);
+
+insert into orders values(05,to_date('07-08-2008','DD-MM-YYYY'),'SamsungM31',2,27000,102);
+
+insert into orders values(06,to_date('05-07-2009','DD-MM-YYYY'),'Redmi',1,10000,104);
+
+insert into orders values(07,to_date('10-04-2005','DD-MM-YYYY'),'OnePlus',1,30000,108);
+
+insert into orders values(08,to_date('11-09-2004','DD-MM-YYYY'),'Apple',2,200000,107);
+
+insert into orders values(09,to_date('23-10-2022','DD-MM-YYYY'),'Motorola',1,27000,109);
+
+insert into orders values(10,to_date('07-12-2023','DD-MM-YYYY'),'Poco',2,30000,110);
+
+------------Retieving Records From Orders Table----------------
+
+select* from orders;
+
+-------------Altering Customer Table and increasing size-------------
+
+
+select* from customer;
+
+alter table customer modify First_Name varchar(50);
+

@@ -1,0 +1,122 @@
+---Table Creation---
+
+CREATE table employees(
+employee_id INT,
+employee_name VARCHAR(50),
+position VARCHAR(50),
+salary DECIMAL(10,2)
+);
+
+insert into employees values(1,'John Harry','Manager',50000.00);
+insert into employees values(2,'Devid Harvey','Data Scientist ',20000.00);
+insert into employees values(3,'John Doe','Data Scientist',20000.00);
+insert into employees values(4,'Rebacca Root','Web Devloper',16000.00);
+insert into employees values(5,'Alice Conway','Backend Devloper',25000.00);
+
+
+----Procedures & It's Types----
+----Parameterized ----
+
+---Bonus/Update----
+CREATE or replace PROCEDURE Bonus(
+     p_position varchar
+)
+As
+BEGIN
+
+UPDATE employees
+SET salary = salary+10000
+WHERE position =p_position;
+END ;
+
+---Fired/Delete----
+
+CREATE or replace PROCEDURE Fired(
+     p_employee_id in int
+)
+As
+BEGIN
+DELETE FROM employees
+WHERE employee_id = p_employee_id;
+END ;
+
+
+---Non Parameterized ----
+
+--Update---
+CREATE or replace PROCEDURE Bonus
+As
+BEGIN
+UPDATE employees
+SET salary = salary+10000
+WHERE position = 'Manager';
+END ;
+
+----Insert--
+CREATE or replace PROCEDURE insert_employee
+As
+BEGIN
+insert into employees values(6,'Joe Root','HR',30000.00);
+END ;
+
+---Execution---
+call insert_employee;
+call Bonus;
+
+---Checking---
+
+select* from employees;
+
+
+
+---Inser_Queries-----
+
+CREATE  OR REPLACE PROCEDURE insert_employee(
+ p_employee_id in INT,
+ p_employee_name in VARCHAR,
+ p_position in VARCHAR,
+ p_salary in DECIMAL
+)
+As
+BEGIN
+INSERT INTO employees (employee_id, employee_name, position, salary)
+VALUES (p_employee_id, p_employee_name, p_position, p_salary);
+END;
+
+
+------Input/Output-----
+
+---------*****---------
+CREATE or replace PROCEDURE Fired(
+     p_employee_id in int,
+    employee_name out varchar
+)
+As
+BEGIN
+
+---TO select the deleted employee---
+SELECT employee_name INTO employee_name FROM employees
+WHERE employee_id = p_employee_id;
+
+---TO delete employee----
+DELETE FROM employees
+WHERE employee_id = p_employee_id;
+END ;
+
+--------******---------
+
+-------Execution of above procedure----------
+-- Declare a variable to store the employee name
+DECLARE
+  employee_name VARCHAR(50);
+BEGIN
+  -- Call the procedure with an employee id and the variable
+  Fired (1, employee_name);
+  -- Print the output value
+  dbms_output.put_line ('The employee name is ' || employee_name);
+END;
+/
+
+
+
+

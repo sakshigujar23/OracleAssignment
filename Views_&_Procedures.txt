@@ -1,0 +1,26 @@
+---------Creating Views & Procedures----------
+
+------Views-------
+create view Mikelson_Family as 
+select* from customer 
+where Last_Name='Mikelson';
+
+----Execution----
+
+Select* from Mikelson_Family;
+
+-----Procedures-----
+
+create or replace procedure Discounts(Order_id in int)  
+AS 
+Begin 
+    update orders 
+    set Total_amount=Total_amount-(Total_amount*10/100) 
+    where Product_name='SamsungM31'; 
+End; 
+
+-----Execution------
+
+call Discounts;
+or
+exec Discounts;
